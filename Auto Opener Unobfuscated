@@ -1,0 +1,19 @@
+(async () => {
+    let pack = prompt("What pack would you like to open?");
+    let amount = prompt("How many packs would you like to open?");
+
+    const packs = await ac.market.getPacks();
+    const user = await ac.user.getUser();
+
+    if (!packs.find(p => p.name === pack)) return alert("The pack you entered does not exist.");
+    if (isNaN(amount)) return alert("The amount you entered is not a number.");
+    if (amount < 1) return alert("You must open at least one pack.");
+    if (packs.find(p => p.name === pack).price * amount > user.tokens) return alert("You do not have enough tokens to open that many packs.");
+
+    for (let i = 0; i < amount; i++) {
+        ac.market.purchasePack(pack).then((res) => console.log(`Blue Unlocked: ${res.blue}\n\nTokens Remaining: ${res.tokens}\n\nRound: ${i + 1}`)).catch((err) => console.log(err));
+        await new Promise(r => setTimeout(r, 750));
+    };
+
+    alert("Packs opened successfully.");
+})();
