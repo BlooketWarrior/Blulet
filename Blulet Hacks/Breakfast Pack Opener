@@ -1,0 +1,1 @@
+javascript:onbeforeunload = () => { return true; };(async()=>{for(let e=0;e<1/0;e++)ac.market.purchasePack("Breakfast").then((n=>console.log(`Blue Unlocked: ${n.blue}\n\nTokens Remaining: ${n.tokens}\n\nRound: ${e+1}`))).catch((e=>console.log(e))),await new Promise((e=>setTimeout(e,750)))})();
